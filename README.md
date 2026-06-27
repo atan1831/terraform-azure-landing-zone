@@ -75,7 +75,7 @@ terraform plan
 # 6. Deploy
 terraform apply
 
-# 7. Cleanup (ne troši kredite)
+# 7. Cleanup
 terraform destroy
 ```
 
@@ -107,3 +107,4 @@ GitHub Actions automatski radi na svakom push/PR:
 
 ---
 *Dio [Azure Cloud Security Portfolio](https://github.com/tvoj-username) projekta*
+=======
