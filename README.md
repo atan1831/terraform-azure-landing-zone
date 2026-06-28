@@ -106,5 +106,5 @@ GitHub Actions automatski radi na svakom push/PR:
 - [ ] GitHub Actions — zeleni workflow
 
 ---
-*Dio [Azure Cloud Security Portfolio](https://github.com/tvoj-username) projekta*
+*Dio [Azure Cloud Security Portfolio]([https://github.com/tvoj-username](https://github.com/atan1831/klaud)) projekta*
 =======
