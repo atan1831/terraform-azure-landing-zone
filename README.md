@@ -87,24 +87,4 @@ GitHub Actions automatski radi na svakom push/PR:
 - `tfsec` — security scan IaC code
 - `Checkov` — compliance scan
 
-## Što sam naučio
-
-- Terraform moduli za reusable infrastrukturu
-- NSG pravila s deny-all default pristupom (zero trust networking)
-- Key Vault network ACL za zabranu javnog pristupa tajnama
-- Activity Log alerting za kritične Azure operacije
-- IaC security scanning u CI/CD piplineu (shift-left security)
-
-## Screenshots
-
-*(Dodaj screenshots iz Azure portala nakon deploymenta)*
-- [ ] Resource Group u Azure portalu
-- [ ] VNet s subnetovima
-- [ ] NSG pravila
-- [ ] Key Vault access policies
-- [ ] Defender for Cloud dashboard
-- [ ] GitHub Actions — zeleni workflow
-
----
-*Dio [Azure Cloud Security Portfolio](https://github.com/tvoj-username) projekta*
 =======
