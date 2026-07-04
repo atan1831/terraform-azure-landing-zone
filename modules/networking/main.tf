@@ -29,7 +29,7 @@ resource "azurerm_network_security_group" "app" {
     destination_port_range     = "3389"
     source_address_prefix      = "Internet"
     destination_address_prefix = "*"
-}
+  }
 
   security_rule {
     name                       = "deny-all-inbound"
