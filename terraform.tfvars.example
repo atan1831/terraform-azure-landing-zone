@@ -1,4 +1,5 @@
 prefix      = "sec"
 environment = "dev"
 location    = "West Europe"
-tenant_id   = "TVOJ-TENANT-ID-OVDJE"
+tenant_id   = "TENANT ID HERE"
+subscription_id = "SUBSC ID HERE"

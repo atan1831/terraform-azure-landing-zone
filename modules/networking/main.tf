@@ -20,6 +20,18 @@ resource "azurerm_network_security_group" "app" {
   resource_group_name = var.resource_group_name
 
   security_rule {
+    name                       = "deny-RDP-from-internet"
+    priority                   = 200
+    direction                  = "Inbound"
+    access                     = "Deny"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "Internet"
+    destination_address_prefix = "*"
+}
+
+  security_rule {
     name                       = "deny-all-inbound"
     priority                   = 4096
     direction                  = "Inbound"

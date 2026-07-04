@@ -1,5 +1,5 @@
 variable "prefix" {
-  description = "Prefix za sve resurse (npr. tvoje inicijale)"
+  description = "Prefix for all resources"
   type        = string
   default     = "sec"
 }
@@ -22,13 +22,13 @@ variable "tenant_id" {
 }
 
 variable "vnet_address_space" {
-  description = "CIDR blok za Virtual Network"
+  description = "CIDR block for Virtual Network"
   type        = list(string)
   default     = ["10.0.0.0/16"]
 }
 
 variable "subnet_prefixes" {
-  description = "CIDR blokovi za subnetove"
+  description = "CIDR blocks for subnets"
   type        = map(string)
   default = {
     app  = "10.0.1.0/24"
@@ -38,7 +38,7 @@ variable "subnet_prefixes" {
 }
 
 variable "subscription_id" {
-  description = "Azure Subscription ID (za Activity Log Alert scope)"
+  description = "Azure Subscription ID (for Activity Log Alert scope)"
   type        = string
   default     = ""
 }

@@ -1,6 +1,6 @@
 # Azure Secure Landing Zone — Terraform
 
-Secure Azure Landing Zone implementiran s Terraformom kao dio cloud security portfolia.
+Secure Azure Landing Zone implemented with terraform.
 
 ## Arhitektura
 
@@ -46,30 +46,30 @@ Azure Subscription
     └── security/        # Defender for Cloud, Monitor alerts
 ```
 
-## Kako pokrenuti
+## How to
 
-### Preduvjeti
+### Whats needed
 - [Terraform](https://developer.hashicorp.com/terraform/install) >= 1.5.0
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - Azure free account
 
-### Koraci
+### Steps
 
 ```bash
-# 1. Login u Azure
+# 1. Login in Azure
 az login
 
-# 2. Dohvati Tenant ID
+# 2. Fetch Tenant ID
 az account show --query tenantId -o tsv
 
-# 3. Kopiraj i popuni varijable
+# 3. Copy and fill in
 cp terraform.tfvars.example terraform.tfvars
-# Uredi terraform.tfvars — dodaj tenant_id
+# Modify terraform.tfvars — add ID's
 
-# 4. Inicijaliziraj Terraform
+# 4. Initiate terraform
 terraform init
 
-# 5. Provjeri što će se kreirati
+# 5. Check what is planned
 terraform plan
 
 # 6. Deploy
@@ -82,29 +82,10 @@ terraform destroy
 ## CI/CD Pipeline
 
 GitHub Actions automatski radi na svakom push/PR:
-- `terraform fmt` — provjera formatiranja
-- `terraform validate` — sintaksna validacija
-- `tfsec` — security scan IaC koda
+- `terraform fmt` — format check
+- `terraform validate` — sintax validiation
+- `tfsec` — security scan IaC code
 - `Checkov` — compliance scan
 
-## Što sam naučio
-
-- Terraform moduli za reusable infrastrukturu
-- NSG pravila s deny-all default pristupom (zero trust networking)
-- Key Vault network ACL za zabranu javnog pristupa tajnama
-- Activity Log alerting za kritične Azure operacije
-- IaC security scanning u CI/CD piplineu (shift-left security)
-
-## Screenshots
-
-*(Dodaj screenshots iz Azure portala nakon deploymenta)*
-- [ ] Resource Group u Azure portalu
-- [ ] VNet s subnetovima
-- [ ] NSG pravila
-- [ ] Key Vault access policies
-- [ ] Defender for Cloud dashboard
-- [ ] GitHub Actions — zeleni workflow
-
 ---
-*Dio [Azure Cloud Security Portfolio](https://github.com/tvoj-username) projekta*
 =======
