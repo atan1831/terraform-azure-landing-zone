@@ -85,6 +85,31 @@ terraform apply
 terraform destroy
 ```
 
+## Screenshots
+
+Deployed to Sweden Central and checked in the portal before `terraform destroy`.
+
+**Every subnet has an NSG**
+
+![Subnets with NSGs](docs/screenshots/subnets-nsg.png)
+
+**Data subnet NSG: only the app subnet is allowed in**
+
+![Data NSG rules](docs/screenshots/data-nsg-rules.png)
+
+The portal flags `deny-all-inbound` with a warning because it also blocks the
+default AllowVnetInBound and AllowAzureLoadBalancerInBound rules. That is
+intended here, but a load balancer in front of this subnet would need an
+explicit allow for its health probes.
+
+**Key Vault uses Azure RBAC**
+
+![Key Vault IAM](docs/screenshots/keyvault-iam.png)
+
+**Key Vault public network access is disabled**
+
+![Key Vault networking](docs/screenshots/keyvault-networking.png)
+
 ## CI/CD Pipeline
 
 GitHub Actions runs automatically on every push/PR:
