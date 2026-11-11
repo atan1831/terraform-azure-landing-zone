@@ -1,14 +1,21 @@
+# Free tier on purpose: paid Defender plans cost money per resource and this is a lab.
 resource "azurerm_security_center_subscription_pricing" "defender_vms" {
+  #checkov:skip=CKV_AZURE_19:Free tier on purpose, lab cost
+  #checkov:skip=CKV_AZURE_55:Free tier on purpose, lab cost
   tier          = "Free"
   resource_type = "VirtualMachines"
 }
 
 resource "azurerm_security_center_subscription_pricing" "defender_storage" {
+  #checkov:skip=CKV_AZURE_19:Free tier on purpose, lab cost
+  #checkov:skip=CKV_AZURE_84:Free tier on purpose, lab cost
   tier          = "Free"
   resource_type = "StorageAccounts"
 }
 
 resource "azurerm_security_center_subscription_pricing" "defender_keyvault" {
+  #checkov:skip=CKV_AZURE_19:Free tier on purpose, lab cost
+  #checkov:skip=CKV_AZURE_87:Free tier on purpose, lab cost
   tier          = "Free"
   resource_type = "KeyVaults"
 }

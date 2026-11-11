@@ -11,7 +11,7 @@ Azure Subscription
     │   ├── app-subnet    (10.0.1.0/24) ← NSG: HTTPS from internet only
     │   ├── data-subnet   (10.0.2.0/24) ← NSG: only from app-subnet
     │   └── mgmt-subnet   (10.0.3.0/24) ← NSG: VNet only, no internet
-    ├── Key Vault (RBAC, soft-delete, network ACL deny-all)
+    ├── Key Vault (RBAC, soft-delete, public network access disabled)
     ├── Network Watcher
     ├── Defender for Cloud (Free tier, paid plans not enabled)
     └── Activity Log alert on Key Vault delete → email
@@ -23,7 +23,7 @@ Azure Subscription
 |---|---|
 | Network segmentation | Every subnet has an NSG with deny-all inbound and explicit allows |
 | Least privilege | Key Vault uses Azure RBAC: deployer gets Key Vault Administrator on the vault only |
-| Secrets management | Key Vault with network ACL deny-all |
+| Secrets management | Key Vault with public network access disabled and network ACL deny-all |
 | Monitoring | Activity Log alert + action group for Key Vault deletion |
 | IaC security | tfsec + Checkov in CI, failing the build on findings |
 | Tagging | All resources tagged: project, environment, owner, managed_by |
@@ -93,7 +93,14 @@ GitHub Actions runs automatically on every push/PR:
 - `tfsec`: IaC security scan
 - `Checkov`: compliance scan
 
-Both scanners fail the build on findings.
+Both scanners fail the build on findings. Findings I accepted for this lab are
+skipped inline with a reason (`#checkov:skip=...`):
+
+| Check | Why it is skipped |
+|---|---|
+| Defender plans not on Standard (CKV_AZURE_19/55/84/87) | Paid plans, lab runs on Free tier |
+| Key Vault purge protection (CKV_AZURE_110, CKV_AZURE_42) | Lab is destroyed every session, purge protection would block that |
+| Key Vault private endpoint (CKV2_AZURE_32) | No private DNS in this lab, public network access is disabled instead |
 
 ## What I learned
 
