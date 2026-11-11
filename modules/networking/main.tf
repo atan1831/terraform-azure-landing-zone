@@ -90,6 +90,39 @@ resource "azurerm_network_security_group" "mgmt" {
   tags = var.tags
 }
 
+# data tier only accepts traffic from the app subnet
+resource "azurerm_network_security_group" "data" {
+  name                = "${var.prefix}-${var.environment}-data-nsg"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
+  security_rule {
+    name                       = "allow-app-subnet-inbound"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = var.subnet_prefixes["app"]
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "deny-all-inbound"
+    priority                   = 4096
+    direction                  = "Inbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  tags = var.tags
+}
+
 resource "azurerm_subnet_network_security_group_association" "app" {
   subnet_id                 = azurerm_subnet.subnets["app"].id
   network_security_group_id = azurerm_network_security_group.app.id
@@ -98,6 +131,11 @@ resource "azurerm_subnet_network_security_group_association" "app" {
 resource "azurerm_subnet_network_security_group_association" "mgmt" {
   subnet_id                 = azurerm_subnet.subnets["mgmt"].id
   network_security_group_id = azurerm_network_security_group.mgmt.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "data" {
+  subnet_id                 = azurerm_subnet.subnets["data"].id
+  network_security_group_id = azurerm_network_security_group.data.id
 }
 
 resource "azurerm_network_watcher" "main" {
