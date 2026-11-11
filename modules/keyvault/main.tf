@@ -7,15 +7,19 @@ resource "random_string" "suffix" {
 }
 
 resource "azurerm_key_vault" "main" {
-  name                        = "${var.prefix}-${var.environment}-kv-${random_string.suffix.result}"
-  location                    = var.location
-  resource_group_name         = var.resource_group_name
-  enabled_for_disk_encryption = true
-  tenant_id                   = var.tenant_id
-  soft_delete_retention_days  = 7
-  purge_protection_enabled    = false
-  sku_name                    = "standard"
-  enable_rbac_authorization   = true
+  #checkov:skip=CKV_AZURE_110:lab is destroyed after every session, purge protection would block purge on destroy
+  #checkov:skip=CKV_AZURE_42:same as above, recoverable requires purge protection
+  #checkov:skip=CKV2_AZURE_32:no private endpoint in this lab, public network access is disabled instead
+  name                          = "${var.prefix}-${var.environment}-kv-${random_string.suffix.result}"
+  location                      = var.location
+  resource_group_name           = var.resource_group_name
+  enabled_for_disk_encryption   = true
+  tenant_id                     = var.tenant_id
+  soft_delete_retention_days    = 7
+  purge_protection_enabled      = false
+  sku_name                      = "standard"
+  enable_rbac_authorization     = true
+  public_network_access_enabled = false
 
   network_acls {
     default_action = "Deny"
