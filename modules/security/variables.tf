@@ -19,11 +19,9 @@ variable "tags" {
 }
 
 variable "security_contact_email" {
-  type    = string
-  default = "tvoj@email.com"
+  type = string
 }
 
 variable "subscription_id" {
-  type    = string
-  default = ""
+  type = string
 }

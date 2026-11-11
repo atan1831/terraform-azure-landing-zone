@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 3.90"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.6"
+    }
   }
 }
 
@@ -46,11 +50,12 @@ module "keyvault" {
 }
 
 module "security" {
-  source              = "./modules/security"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = var.location
-  prefix              = var.prefix
-  environment         = var.environment
-  subscription_id     = var.subscription_id
-  tags                = local.common_tags
+  source                 = "./modules/security"
+  resource_group_name    = azurerm_resource_group.main.name
+  location               = var.location
+  prefix                 = var.prefix
+  environment            = var.environment
+  subscription_id        = var.subscription_id
+  security_contact_email = var.security_contact_email
+  tags                   = local.common_tags
 }

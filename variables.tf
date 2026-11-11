@@ -13,7 +13,7 @@ variable "environment" {
 variable "location" {
   description = "Azure region"
   type        = string
-  default     = "West Europe"
+  default     = "Sweden Central"
 }
 
 variable "tenant_id" {
@@ -40,5 +40,9 @@ variable "subnet_prefixes" {
 variable "subscription_id" {
   description = "Azure Subscription ID (for Activity Log Alert scope)"
   type        = string
-  default     = ""
+}
+
+variable "security_contact_email" {
+  description = "Email that receives the Key Vault delete alert"
+  type        = string
 }
