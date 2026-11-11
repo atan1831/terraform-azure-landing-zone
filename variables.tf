@@ -17,7 +17,7 @@ variable "location" {
 }
 
 variable "tenant_id" {
-  description = "Azure Tenant ID (iz Entra ID)"
+  description = "Azure Tenant ID (from Entra ID)"
   type        = string
 }
 

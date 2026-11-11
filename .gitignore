@@ -1,10 +1,10 @@
-# Terraform state - NIKAD ne commitaj ovo
+# Terraform state - NEVER commit this
 *.tfstate
 *.tfstate.*
 .terraform/
 .terraform.lock.hcl
 
-# Varijable s tajnama
+# Variables containing secrets
 terraform.tfvars
 *.auto.tfvars
 

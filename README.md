@@ -1,8 +1,8 @@
-# Azure Secure Landing Zone — Terraform
+# Azure Secure Landing Zone (Terraform)
 
-Secure Azure Landing Zone implemented with terraform.
+Secure Azure Landing Zone implemented with Terraform.
 
-## Arhitektura
+## Architecture
 
 ```
 Azure Subscription
@@ -17,38 +17,38 @@ Azure Subscription
     └── Monitor Alerts (Key Vault delete alert)
 ```
 
-## Security principi implementirani
+## Security
 
-| Princip | Implementacija |
+| Principle | Implementation |
 |---|---|
-| Least privilege | NSG pravila: deny-all default, explicit allow |
-| Secrets management | Key Vault s network ACL deny-all |
-| Monitoring | Activity Log alert za kritične operacije |
-| IaC Security | tfsec + Checkov u CI/CD piplineu |
-| Tagging | Sve resursi tagovi: project, environment, managed_by |
+| Least privilege | NSG rules: deny-all by default, explicit allow |
+| Secrets management | Key Vault with network ACL deny-all |
+| Monitoring | Activity Log alert for critical operations |
+| IaC Security | tfsec + Checkov in the CI/CD pipeline |
+| Tagging | All resources tagged: project, environment, managed_by |
 
-## Struktura repozitorija
+## Repository structure
 
 ```
 .
-├── main.tf              # Root modul — orchestracija
-├── variables.tf         # Input varijable
-├── outputs.tf           # Output vrijednosti
-├── locals.tf            # Lokalne varijable (tagovi)
+├── main.tf              # Root module
+├── variables.tf         # Input variables
+├── outputs.tf           # Output values
+├── locals.tf            # Local values (tags)
 ├── terraform.tfvars.example
-├── .gitignore           # Isključuje state i tfvars
+├── .gitignore           # Excludes state and tfvars
 ├── .github/
 │   └── workflows/
 │       └── terraform-validate.yml   # CI: fmt, validate, tfsec, checkov
 └── modules/
-    ├── networking/      # VNet, subneti, NSG grupe
-    ├── keyvault/        # Key Vault s access policy
+    ├── networking/      # VNet, subnets, NSGs
+    ├── keyvault/        # Key Vault with access policy
     └── security/        # Defender for Cloud, Monitor alerts
 ```
 
-## How to
+## Getting started
 
-### Whats needed
+### Prerequisites
 - [Terraform](https://developer.hashicorp.com/terraform/install) >= 1.5.0
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - Azure free account
@@ -56,20 +56,20 @@ Azure Subscription
 ### Steps
 
 ```bash
-# 1. Login in Azure
+# 1. Log in to Azure
 az login
 
-# 2. Fetch Tenant ID
+# 2. Get your Tenant ID
 az account show --query tenantId -o tsv
 
-# 3. Copy and fill in
+# 3. Copy the example variables file
 cp terraform.tfvars.example terraform.tfvars
-# Modify terraform.tfvars — add ID's
+# Edit terraform.tfvars and add your IDs
 
-# 4. Initiate terraform
+# 4. Initialize Terraform
 terraform init
 
-# 5. Check what is planned
+# 5. Check the plan
 terraform plan
 
 # 6. Deploy
@@ -81,10 +81,9 @@ terraform destroy
 
 ## CI/CD Pipeline
 
-GitHub Actions automatski radi na svakom push/PR:
-- `terraform fmt` — format check
-- `terraform validate` — sintax validiation
-- `tfsec` — security scan IaC code
-- `Checkov` — compliance scan
+GitHub Actions runs automatically on every push/PR:
+- `terraform fmt`: format check
+- `terraform validate`: syntax validation
+- `tfsec`: IaC security scan
+- `Checkov`: compliance scan
 
-=======

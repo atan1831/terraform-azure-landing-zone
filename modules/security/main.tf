@@ -31,7 +31,7 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_delete" {
   name                = "${var.prefix}-${var.environment}-kv-delete-alert"
   resource_group_name = var.resource_group_name
   scopes              = ["/subscriptions/${var.subscription_id}"]
-  description         = "Alert kada se Key Vault obrise"
+  description         = "Alert when a Key Vault is deleted"
 
   criteria {
     operation_name = "Microsoft.KeyVault/vaults/delete"
